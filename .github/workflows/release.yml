@@ -16,16 +16,13 @@ jobs:
 
       - name: Git Diffs
         id: changed-files
-        run: echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}})" > changed_files.txt
+        run: echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}} | grep -v -E '.github/workflows/release.yml|scripts/pipeline/release.sh|scripts/pipeline/upload_file_to_s3.py')" > changed_files.txt
 
       - name: List changed files and Upload in AWS S3
         run: |
           changed_files=$(cat changed_files.txt)
-          echo "Changed files: $changed_files"
           for file in $changed_files; do
-            if [ "$file" != ".github/workflows/release.yml" ] || [ "$file" != "scripts/pipeline/release.sh" ] || [ "$file" != "scripts/pipeline/upload_file_to_s3.py" ]; then
-              echo "$file was changeddd"
-            fi
+            echo "$file was changeddd"
           done
 
       # - name: Release documents to AWS S3
