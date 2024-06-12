@@ -12,12 +12,10 @@ jobs:
         id: changed-files
         run: |
           if ${{github.event_name == 'push'}}; then
-            echo "changed_files=$(git diff --name-only -- HEAD^..HEAD)" >> $GITHUB_OUTPUT
+            echo "changed_files=$(git diff --name-only HEAD^..HEAD)" >> $GITHUB_OUTPUT
           else
             echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}} | xargs)" >> $GITHUB_OUTPUT
           fi
-        with:
-          fetch-depth: 2
       - name: List changed files
         run: |
           for file in ${{steps.changed-files.outputs.changed_files}}; do
