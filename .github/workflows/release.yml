@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
       - name: Git Diff
         id: changed-files
-        run: echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}}) >> $GITHUB_OUTPUT
+        run: echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}})" >> $GITHUB_OUTPUT
       - name: List changed files
         run: |
           for file in ${{steps.changed-files.outputs.changed_files}}; do
