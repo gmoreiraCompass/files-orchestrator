@@ -6,17 +6,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-      - name: Git Diff
-        id: changed-files
+      - name: Filter documents
         run: |
-          if ${{github.event_name == 'push'}}; then
-            echo "changed_files=$(git diff --name-only -- HEAD^ HEAD)" >> $GITHUB_OUTPUT
-          else
-            echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}} | xargs)" >> $GITHUB_OUTPUT
-          fi
+        find . \( -type f -name "*.yml" -o -name "*.sh" -o -name "*.zip" \) | sort > documents.txt
+      - name: Check for changes
+        uses: github/actions/filter-changed-files@v1
+        with:
+          files: documents.txt
+          comparator: changed
+      # - name: Git Diff
+      #   id: changed-files
+      #   run: |
+      #     if ${{github.event_name == 'push'}}; then
+      #       echo "changed_files=$(git diff --name-only -- HEAD^ HEAD)" >> $GITHUB_OUTPUT
+      #     else
+      #       echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}} | xargs)" >> $GITHUB_OUTPUT
+      #     fi
       - name: List changed files
         run: |
           for file in ${{steps.changed-files.outputs.changed_files}}; do
