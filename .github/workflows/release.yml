@@ -24,4 +24,4 @@ jobs:
           for file in $changed_files; do
             bash scripts/pipeline/release.sh ${{secrets.AWS_Bucket_Name}} "$file" ${{secrets.AWS_Access_Key}} ${{secrets.AWS_Access_Secret}} "$file"
             echo "$file was changeddd"
-          done"
+          done
