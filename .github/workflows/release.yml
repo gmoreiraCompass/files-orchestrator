@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
       - name: Git Diff
         id: changed-files
-        run: git diff --name-only ${{github.event.before}} ${{github.event.after}})
+        run: git diff --name-only ${{github.event.before}} ${{github.event.after}}
       # - name: List changed files and Upload in AWS S3
       #   run: |
       #     for file in ${{steps.changed-files.outputs.changed_files}}; do
