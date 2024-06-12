@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Filter documents
         run: |
-        find . \( -type f -name "*.yml" -o -name "*.sh" -o -name "*.zip" \) | sort > documents.txt
+          find . \( -type f -name "*.yml" -o -name "*.sh" -o -name "*.zip" \) | sort > documents.txt
       - name: Check for changes
         uses: github/actions/filter-changed-files@v1
         with:
