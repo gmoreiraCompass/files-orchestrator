@@ -11,9 +11,6 @@ echo "3 - "$aws_access_key
 echo "4 - "$aws_access_secret
 echo "5 - "$local_path
 
-# Remove any existing versions of a ZIP
-rm -rf $local_path
-
 # Install required dependencies for Python script
 pip3 install boto3
 
