@@ -8,27 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Filter documents
-        run: |
-          find . \( -type f -name "*.yml" -o -name "*.sh" -o -name "*.zip" \) | sort > documents.txt
-      - name: Check for changes
-        uses: github/actions/filter-changed-files@v1
+      - name: Git Diff
         with:
-          files: documents.txt
-          comparator: changed
-      # - name: Git Diff
-      #   id: changed-files
-      #   run: |
-      #     if ${{github.event_name == 'push'}}; then
-      #       echo "changed_files=$(git diff --name-only -- HEAD^ HEAD)" >> $GITHUB_OUTPUT
-      #     else
-      #       echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}} | xargs)" >> $GITHUB_OUTPUT
-      #     fi
+          fetch-depth: 2
+        id: changed-files
+        run: |
+          if ${{github.event_name == 'push'}}; then
+            echo "changed_files=$(git diff --name-only -- HEAD^..HEAD)" >> $GITHUB_OUTPUT
+          else
+            echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}} | xargs)" >> $GITHUB_OUTPUT
+          fi
       - name: List changed files
         run: |
           for file in ${{steps.changed-files.outputs.changed_files}}; do
             echo "$file was changed"
           done
-      - uses: actions/checkout@v4
       - name: Release documents to AWS S3
         run: bash scripts/pipeline/release.sh ${{secrets.AWS_Bucket_Name}} "app/myapp.zip" ${{secrets.AWS_Access_Key}} ${{secrets.AWS_Access_Secret}} "myapp.zip"
