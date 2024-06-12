@@ -15,11 +15,11 @@ jobs:
           fetch-depth: 0
       - name: Git Diff
         id: changed-files
-        run: echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}})" >> $GITHUB_OUTPUT
-      - name: List changed files and Upload in AWS S3
-        run: |
-          for file in ${{steps.changed-files.outputs.changed_files}}; do
-            echo "$file was changed"
-          done
+        run: git diff --name-only ${{github.event.before}} ${{github.event.after}})
+      # - name: List changed files and Upload in AWS S3
+      #   run: |
+      #     for file in ${{steps.changed-files.outputs.changed_files}}; do
+      #       echo "$file was changed"
+      #     done
       - name: Release documents to AWS S3
         run: bash scripts/pipeline/release.sh ${{secrets.AWS_Bucket_Name}} "app/myapp.zip" ${{secrets.AWS_Access_Key}} ${{secrets.AWS_Access_Secret}} "myapp.zip"
