@@ -24,7 +24,8 @@ jobs:
           echo "Changed files: $changed_files"
           for file in $changed_files; do
             if [ "$file" != ".github/workflows/release.yml" ] || [ "$file" != "scripts/pipeline/release.sh" ] || [ "$file" != "scripts/pipeline/upload_file_to_s3.py" ]; then
-            echo "$file was changeddd"
+              echo "$file was changeddd"
+            fi
           done
 
       # - name: Release documents to AWS S3
