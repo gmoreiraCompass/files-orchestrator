@@ -8,5 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Git Diff
+        id: changed-files
+        run: |
+          if ${{github.event_name == 'push'}}; then
+            echo "changed_files=$(git diff --name-only -r HEAD^1 HEAD | xargs)" >> $GITHUB_OUTPUT
+          else
+            echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}} | xargs)" >> $GITHUB_OUTPUT
+          fi
+      - name: List changed files
+        run: |
+          for file in ${{steps.changed-files.outputs.changed_files}}; do
+            echo "$file was changed"
+          done
+      - uses: actions/checkout@v4
       - name: Release documents to AWS S3
-        run: bash scripts/pipeline/release.sh ${{secrets.AWS_Bucket_Name}} "./myapp.zip" ${{secrets.AWS_Access_Key}} ${{secrets.AWS_Access_Secret}} "myapp.zip"
+        run: bash scripts/pipeline/release.sh ${{secrets.AWS_Bucket_Name}} "app/myapp.zip" ${{secrets.AWS_Access_Key}} ${{secrets.AWS_Access_Secret}} "myapp.zip"
