@@ -8,21 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # - name: Git Diff
-      #   id: changed-files
-      #   run: |
-      #     if ${{github.event_name == 'push'}}; then
-      #       echo "changed_files=$(git diff --name-only -- HEAD^ HEAD | xargs)" >> $GITHUB_OUTPUT
-      #     else
-      #       echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}} | xargs)" >> $GITHUB_OUTPUT
-      #     fi
       - name: Git Diff
         id: changed-files
         run: |
-          if [${{ github.event_name == 'push'}}]; then
-            echo "changed_files=$(git diff --name-only HEAD^ HEAD)" >> $GITHUB_OUTPUT
+          if ${{github.event_name == 'push'}}; then
+            echo "changed_files=$(git diff --name-only -- HEAD^ HEAD)" >> $GITHUB_OUTPUT
           else
-            echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})" >> $GITHUB_OUTPUT
+            echo "changed_files=$(git diff --name-only ${{github.event.before}} ${{github.event.after}} | xargs)" >> $GITHUB_OUTPUT
           fi
       - name: List changed files
         run: |
