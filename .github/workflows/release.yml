@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - ".github/**"
-      - "scripts/**"
 jobs:
   build:
     runs-on: ubuntu-latest
