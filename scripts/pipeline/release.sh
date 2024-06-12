@@ -16,7 +16,7 @@ rm -rf $local_path
 
 
 # Create a zip of the current directory
-zip -r $local_path . -x .git/ .git/*** .git/workflows/release.yml scripts/pipeline/release.sh scripts/pipeline/upload_file_to_s3.py .DS_Store
+zip -r $local_path . -x .git/ .git/*** .git/workflows/release.yml scripts/pipeline/release.sh scripts/pipeline/upload_file_to_s3.py
 
 # Install required dependencies for Python script
 pip3 install boto3
