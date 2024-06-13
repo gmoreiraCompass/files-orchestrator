@@ -1,6 +1,10 @@
 import boto3
 
-class Config(aws_access_key, aws_access_secret):
+class Config:
+  def __init__(aws_access_key, aws_access_secret):
+    aws_access_key = ""
+    aws_access_secret = ""
+
   @staticmethod
   def session():
     return boto3.Session(
