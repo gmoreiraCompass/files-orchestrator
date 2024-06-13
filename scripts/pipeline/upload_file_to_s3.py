@@ -15,7 +15,7 @@ def main():
   aws_access_secret=sys.argv[4]
   local_path=sys.argv[5]
 
-  Config(aws_access_key,aws_access_secret)
+  Config(aws_access_key, aws_access_secret)
   clientS3 = Config.clientS3()
 
   response = client.upload_file(
