@@ -1,5 +1,5 @@
-import boto3
 import sys
+from aws_config import Config
 
 def main():
   print(sys.argv)
@@ -15,11 +15,8 @@ def main():
   aws_access_secret=sys.argv[4]
   local_path=sys.argv[5]
 
-  session = boto3.Session(
-    aws_access_key_id=aws_access_key,
-    aws_secret_access_key=aws_access_secret
-  )
-  client = session.client('s3')
+  Config(aws_access_key,aws_access_secret)
+  clientS3 = Config.clientS3()
 
   response = client.upload_file(
     Filename=local_path,
