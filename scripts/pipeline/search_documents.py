@@ -1,6 +1,7 @@
 # import sys
 import os
 from pathlib import Path
+
 # from aws_config import Config
 
 # # bucket_name=sys.argv[1]
@@ -26,31 +27,24 @@ from pathlib import Path
 #     print("Is file", file)
 
 
-
-# Diretório raiz do projeto
 project_root = Path()
 
-# Listas de pastas e arquivos a serem ignorados
 ignore_dirs = {'.git', '.github', 'scripts'}
 ignore_files = {'README.md'}
 
-# Função para iterar sobre as pastas do projeto
+
 def iterate_project_dirs(root):
-  project_structure = {}
-  for dirpath, dirnames, filenames in os.walk(root):
-      # Remover pastas a serem ignoradas da lista de pastas
-      dirnames[:] = [d for d in dirnames if d not in ignore_dirs]
+    project_structure = {}
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = [d for d in dirnames if d not in ignore_dirs]
 
-      # Iterar sobre os arquivos no diretório atual
-      for filename in filenames:
-          # Pular arquivos que devem ser ignorados
-          if filename in ignore_files:
-              continue
-          # Caminho completo do arquivo
-          file_path = os.path.join(dirpath, filename)
-          print(file_path)  # Aqui você pode substituir pela lógica desejada
-          project_structure[relative_path] = filenames
-  return project_structure
+        for filename in filenames:
+            if filename in ignore_files:
+                continue
+            file_path = os.path.join(dirpath, filename)
+            print(file_path)
+            project_structure[file_path] = filenames
+    return project_structure
 
-# Chamar a função de iteração
+
 iterate_project_dirs(project_root)
