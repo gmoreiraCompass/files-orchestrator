@@ -44,7 +44,7 @@ def iterate_project_dirs(root):
             file_path = os.path.join(dirpath, filename)
             print(file_path)
             project_structure[file_path] = filenames
+    print(project_structure)
     return project_structure
-
-
+    
 iterate_project_dirs(project_root)
