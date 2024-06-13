@@ -16,7 +16,7 @@ def main():
   local_path=sys.argv[5]
 
   Config(aws_access_key, aws_access_secret)
-  clientS3 = Config.session.client('s3')
+  clientS3 = Config.session().client('s3')
 
   response = client.upload_file(
     Filename=local_path,
