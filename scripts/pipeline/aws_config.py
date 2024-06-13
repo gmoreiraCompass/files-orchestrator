@@ -8,6 +8,6 @@ class Config:
   @staticmethod
   def session():
     return boto3.Session(
-      aws_access_key_id = self.aws_access_key,
-      aws_secret_access_key = self.aws_access_secret
+      aws_access_key_id = aws_access_key,
+      aws_secret_access_key = aws_access_secret
     )
