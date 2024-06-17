@@ -37,14 +37,14 @@ project_folder = os.listdir(dir)
 # print("dict:", dict_files)
 
 def iterate_project_dirs(root):
-    for item in root:
-        dict_files = {}
-        if os.path.isdir(item):
-            folders = os.listdir(item)
-            for file in folders:
-                dict_files[item] = file
-        print("interno: ", dict_files)
-        return dict_files
+    dict_files = {}
+    for item in os.listdir(root):
+        item_path = os.path.join(root, item)
+        if os.path.isdir(item_path):
+            dict_files[item] = os.listdir(item_path)
+    return dict_files
 
 
-print(iterate_project_dirs(project_folder))
+iterate = iterate_project_dirs(project_folder)
+
+
