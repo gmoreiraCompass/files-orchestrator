@@ -47,11 +47,11 @@ def iterate_project_dirs(root):
         for item in os.listdir(root):
             item_path = os.path.join(root, item) 
             if os.path.isdir(item_path):
-                dict_files[item_path] = iterate_project_dirs(item_path)
+                dict_files[os.path.basename(item_path)] = iterate_project_dirs(item_path)
             else:
-                if root not in dict_files:
-                    dict_files[root] = []
-                dict_files[root].append(item)
+                if os.path.basename(root) not in dict_files:
+                    dict_files[os.path.basename(root)] = []
+                dict_files[os.path.basename(root)].append(item)
     return dict_files
 
 
