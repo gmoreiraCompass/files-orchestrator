@@ -32,19 +32,22 @@ project_root = Path()
 ignore_dirs = {'.git', '.github', 'scripts'}
 ignore_files = {'README.md'}
 
+dir = "./"
+files = os.listdir(dir)
+ 
+print(files)
+# def iterate_project_dirs(root):
+#     project_structure = {}
+#     for dirpath, dirnames, filenames in os.walk(root):
+#         dirnames[:] = [d for d in dirnames if d not in ignore_dirs]
 
-def iterate_project_dirs(root):
-    project_structure = {}
-    for dirpath, dirnames, filenames in os.walk(root):
-        dirnames[:] = [d for d in dirnames if d not in ignore_dirs]
+#         for filename in filenames:
+#             if filename in ignore_files:
+#                 continue
+#             file_path = os.path.join(dirpath, filename)
+#             print(file_path)
+#             project_structure[file_path] = filenames
+#     print(project_structure)
+#     return project_structure
 
-        for filename in filenames:
-            if filename in ignore_files:
-                continue
-            file_path = os.path.join(dirpath, filename)
-            print(file_path)
-            project_structure[file_path] = filenames
-    print(project_structure)
-    return project_structure
-    
-iterate_project_dirs(project_root)
+# iterate_project_dirs(project_root)
