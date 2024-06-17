@@ -34,8 +34,7 @@ for item in project_folder:
             dict_files[item]=file
 
 print("dict:", dict_files)
- 
-print(files)
+
 # def iterate_project_dirs(root):
 #     for dirpath, dirnames, filenames in os.walk(root):
 #     project_structure = {}
