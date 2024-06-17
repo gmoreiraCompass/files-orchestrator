@@ -43,7 +43,7 @@ def iterate_project_dirs(root):
             folders = os.listdir(item)
             for file in folders:
                 dict_files[item] = file
-                print("interno: ", dict_files)
+        print("interno: ", dict_files)
         return dict_files
 
 
