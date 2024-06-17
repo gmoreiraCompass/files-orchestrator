@@ -34,11 +34,18 @@ ignore_files = {'README.md'}
 
 dir = "./"
 files = os.listdir(dir)
+dict_files = {}
+
+item for in files:
+    if os.path.isdir(item):
+        dict_files.fromkeys(items)
+
+    print("dict:" dict_files)
  
 print(files)
 # def iterate_project_dirs(root):
-#     project_structure = {}
 #     for dirpath, dirnames, filenames in os.walk(root):
+#     project_structure = {}
 #         dirnames[:] = [d for d in dirnames if d not in ignore_dirs]
 
 #         for filename in filenames:
