@@ -39,7 +39,7 @@ dict_files = {}
 for item in files:
     if os.path.isdir(item):
         print('is folder')
-        dict_files.fromkeys(item)
+        dict_files[item]='folder'
 
     
 print("dict:", dict_files)
