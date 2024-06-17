@@ -36,11 +36,11 @@ dir = "./"
 files = os.listdir(dir)
 dict_files = {}
 
-item for in files:
+for item in files:
     if os.path.isdir(item):
-        dict_files.fromkeys(items)
+        dict_files.fromkeys(item)
 
-    print("dict:" dict_files)
+    print("dict:", dict_files)
  
 print(files)
 # def iterate_project_dirs(root):
