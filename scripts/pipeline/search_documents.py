@@ -40,7 +40,8 @@ for item in files:
     if os.path.isdir(item):
         dict_files.fromkeys(item)
 
-    print("dict:", dict_files)
+    
+print("dict:", dict_files)
  
 print(files)
 # def iterate_project_dirs(root):
