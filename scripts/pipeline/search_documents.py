@@ -34,21 +34,24 @@ ignore_files = {'README.md', '.gitignore'}
 # print("dict:", dict_files)
 
 def iterate_project_dirs(root):
+    dict_files = {}
+
     if isinstance(root, list):
-        # Se root é uma lista, iterar sobre cada caminho na lista
         dict_files = {}
         for directory in root:
             if os.path.isdir(directory):
                 dict_files.update(iterate_project_dirs(directory))
         return dict_files
 
-    # Se root é um único diretório
-    dict_files = {}
-    for item in os.listdir(root):  # Listar o conteúdo do diretório raiz
-        item_path = os.path.join(root, item)  # Obter o caminho completo do item
-        if os.path.isdir(item_path):  # Verificar se o item é um diretório
-            dict_files[item_path] = os.listdir(item_path)  # Armazenar a lista de arquivos/pastas do diretório
-    print("intern: ", dict_files)
+    if os.path.isdir(root):
+        for item in os.listdir(root):
+            item_path = os.path.join(root, item) 
+            if os.path.isdir(item_path):
+                dict_files[item_path] = iterate_project_dirs(item_path)
+            else:
+                if root not in dict_files:
+                    dict_files[root] = []
+                dict_files[root].append(item)
     return dict_files
 
 
