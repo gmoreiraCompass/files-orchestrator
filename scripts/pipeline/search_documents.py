@@ -38,10 +38,11 @@ project_folder = os.listdir(dir)
 
 def iterate_project_dirs(root):
     dict_files = {}
-    for item in os.listdir(root):
-        item_path = os.path.join(root, item)
-        if os.path.isdir(item_path):
-            dict_files[item] = os.listdir(item_path)
+    for item in os.listdir(root):  # Listar o conteúdo do diretório raiz
+        item_path = os.path.join(root, item)  # Obter o caminho completo do item
+        if os.path.isdir(item_path):  # Verificar se o item é um diretório
+            dict_files[item] = os.listdir(item_path)  # Armazenar a lista de arquivos/pastas do diretório
+    print("interno: ", dict_files)
     return dict_files
 
 
