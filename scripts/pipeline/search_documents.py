@@ -1,7 +1,5 @@
 # import sys
 import os
-from pathlib import Path
-
 # from aws_config import Config
 
 # # bucket_name=sys.argv[1]
@@ -22,26 +20,19 @@ from pathlib import Path
 # print(portals)
 # print(home)
 
-# for file in portals.iterdir():
-#   if file.is_file():
-#     print("Is file", file)
-
-
-project_root = Path()
-
 ignore_dirs = {'.git', '.github', 'scripts'}
 ignore_files = {'README.md'}
 
 dir = "./"
-files = os.listdir(dir)
+project_folder = os.listdir(dir)
 dict_files = {}
 
-for item in files:
+for item in project_folder:
     if os.path.isdir(item):
-        print('is folder')
-        dict_files[item]='folder'
+        folders = os.listdir(item)
+        for file in folders:
+            dict_files[item]=file
 
-    
 print("dict:", dict_files)
  
 print(files)
